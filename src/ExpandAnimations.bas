@@ -138,6 +138,10 @@ function expandDocument(doc as Object, oStatusBar as Object)
     ' go through pages in reverse order
     for i = numSlides-1 to 0 step -1
         slide = doc.drawPages(i)
+        ' turn off normal page number fields
+        slide.IsPageNumberVisible = False
+        ' abuse the footer field for page numbers
+        slide.FooterText = CStr(i+1) & " / " & CStr(numSlides)
         oStatusBar.setValue(numSlides-i)
         if hasAnimation(slide) then
             n = countAnimationSteps(slide)
